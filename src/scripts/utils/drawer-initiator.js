@@ -3,10 +3,10 @@ const DrawerInitiator = {
     button.addEventListener('click', (event) => {
       this._toggleDrawer(event, drawer);
     });
-    
+
     content.addEventListener('click', (event) => {
       this._closeDrawer(event, drawer);
-    })
+    });
 
   },
   _toggleDrawer(event, drawer) {
@@ -18,6 +18,6 @@ const DrawerInitiator = {
     event.stopPropagation();
     drawer.classList.remove('open');
   },
-}
+};
 
-export default DrawerInitiator
+export default DrawerInitiator;
