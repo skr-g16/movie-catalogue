@@ -18,7 +18,7 @@ const NowPlaying = {
     movies.forEach((movie) => {
       moviesContainer.innerHTML += createMovieItemTemplate(movie);
     });
-  },
+  }
 };
 
 export default NowPlaying;

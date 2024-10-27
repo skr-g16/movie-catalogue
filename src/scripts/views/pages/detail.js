@@ -14,7 +14,7 @@ const Detail = {
     const movie = await theMovieDbSource.detailMovie(url.id);
     const movieContainer = document.querySelector('#movie');
     movieContainer.innerHTML = createMovieDetailTemplate(movie);
-  },
+  }
 };
 
 export default Detail;

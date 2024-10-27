@@ -6,7 +6,7 @@ const routes = {
   '/': nowPlaying,
   '/now-playing': nowPlaying,
   '/upcoming': upcoming,
-  '/detail/:id': detail,
+  '/detail/:id': detail
 };
 
 export default routes;

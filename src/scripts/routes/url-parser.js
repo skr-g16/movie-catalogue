@@ -15,7 +15,7 @@ const urlParser = {
     return {
       resource: urlsSplits[1] || null,
       id: urlsSplits[2] || null,
-      verb: urlsSplits[3] || null,
+      verb: urlsSplits[3] || null
     };
   },
 
@@ -25,7 +25,7 @@ const urlParser = {
       (splitedUrl.id ? '/:id' : '') +
       (splitedUrl.verb ? `/${splitedUrl.verb}` : '')
     );
-  },
+  }
 };
 
 export default urlParser;
