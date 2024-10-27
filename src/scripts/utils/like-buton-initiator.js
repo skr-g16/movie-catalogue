@@ -3,7 +3,7 @@ import {
   createLikeButtonTemplate,
   createLikedButtonTemplate,
 } from '../views/templates/template-creator';
-const likeButtonInitiaton = {
+const likeButtonInitiator = {
   async init({ likeButtonContainer, movie }) {
     this._likeButtonContainer = likeButtonContainer;
     this._movie = movie;
@@ -40,4 +40,4 @@ const likeButtonInitiaton = {
   },
 };
 
-export default likeButtonInitiaton;
+export default likeButtonInitiator;
