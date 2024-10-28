@@ -22,7 +22,7 @@ const likeButtonInitiator = {
     return !!movie;
   },
 
-  async _renderLike() {
+  _renderLike() {
     this._likeButtonContainer.innerHTML = createLikeButtonTemplate();
     const likeButton = document.querySelector('#likeButton');
     likeButton.addEventListener('click', async () => {
@@ -30,7 +30,8 @@ const likeButtonInitiator = {
       this._renderButton();
     });
   },
-  async _renderLiked() {
+
+  _renderLiked() {
     this._likeButtonContainer.innerHTML = createLikedButtonTemplate();
     const likeButton = document.querySelector('#likeButton');
     likeButton.addEventListener('click', async () => {
