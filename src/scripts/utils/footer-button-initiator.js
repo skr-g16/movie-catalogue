@@ -1,3 +1,4 @@
+import { async } from 'regenerator-runtime';
 import config from '../globals/config';
 import notificationHelper from './notification-helper';
 
@@ -25,7 +26,9 @@ const footerButtonInitiator = {
       });
   },
 
-  async _initialState() {},
+  async _initialState() {
+    this._showSubscribeButton();
+  },
 
   async _subscribePushMessage(event) {
     event.stopPropagation();
@@ -61,7 +64,34 @@ const footerButtonInitiator = {
   },
   async _unsubscribePushMessage(event) {
     event.stopPropagation();
-    console.log('Unsubscribe Push Message');
+
+    const pushSubscription =
+      await this._registrationServiceWorker?.pushManager.getSubscription();
+    if (!pushSubscription) {
+      window.alert("Haven't subscribing to push message");
+      return;
+    }
+    try {
+      await this._sendPostToServer(
+        config.PUSH_MSG_UNSUBSCRIBE_URL,
+        pushSubscription
+      );
+      const isHasBeenUnsubscribed = await pushSubscription.unsubscribe();
+      if (!isHasBeenUnsubscribed) {
+        console.log('Failed to unsubscribe push message');
+        await this._sendPostToServer(
+          config.PUSH_MSG_SUBSCRIBE_URL,
+          pushSubscription
+        );
+        return;
+      }
+      console.log('Push message has been unsubscribed');
+    } catch (err) {
+      console.error(
+        'Failed to erase push notification data from server:',
+        err.message
+      );
+    }
   },
 
   _urlB64ToUint8array: (base64String) => {
@@ -147,6 +177,11 @@ const footerButtonInitiator = {
       }
     }
     return true;
+  },
+  async _showSubscribeButton() {
+    this._isSubscribedToServerForHiddenSubscribeButton(
+      await this._isCurrentSubscriptionAvailable()
+    );
   },
 };
 

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "start-dev": "webpack serve --config webpack.dev.js",
-    "server": "http-server dist --port 9000",
+    "server": "http-server dist --port 5000",
     "lint": "eslint ./src",
     "fix-lint": "eslint ./src --fix"
   },

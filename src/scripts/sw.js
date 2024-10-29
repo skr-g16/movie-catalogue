@@ -30,12 +30,14 @@ self.addEventListener('install', () => {
 self.addEventListener('push', (event) => {
   console.log('Service Worker: Pushed');
 
+  const dataJson = event.data.json();
+
   const notificationData = {
-    title: 'Push Notification',
+    title: dataJson.title,
     options: {
-      body: 'This is a push notification',
-      icon: '/favicon.png',
-      image: '/icon-512x512/icon-512x512.jpg',
+      body: dataJson.options.body,
+      icon: dataJson.options.icon,
+      image: dataJson.options.image,
     },
   };
 
@@ -45,4 +47,15 @@ self.addEventListener('push', (event) => {
   );
 
   event.waitUntil(showNotification);
+});
+
+self.addEventListener('notificationclick', (event) => {
+  const clickedNotification = event.notification;
+  clickedNotification.close();
+
+  const chainPromise = async () => {
+    console.log('notification has been clicked');
+    await self.clients.openWindow('https://github.com/skr-g16');
+  };
+  event.waitUntil(chainPromise());
 });
